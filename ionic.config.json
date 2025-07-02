@@ -1,0 +1,7 @@
+{
+  "name": "population_gdp_dashboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
