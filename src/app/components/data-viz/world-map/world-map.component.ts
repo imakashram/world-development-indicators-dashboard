@@ -1,5 +1,6 @@
 import { Component, Input, ViewContainerRef, OnChanges } from '@angular/core';
 import * as d3 from 'd3';
+import { abbreviateNumber } from 'src/app/utils/utils';
 import * as topojson from 'topojson-client';
 
 @Component({
@@ -62,6 +63,10 @@ export class WorldMapComponent implements OnChanges {
           return this.colorScale(this.devIndicatorMap.get(d.properties.name) ?? 0)
         })
         .attr('stroke', '#333')
+        .selectAll('title')
+        .data((d)=>[d])
+        .join('title')
+        .text((d:any) => `${d.properties.name}: ${abbreviateNumber(this.devIndicatorMap.get(d.properties.name))}` )
 
 
         svg.selectAll('g#world-path')
@@ -85,6 +90,10 @@ export class WorldMapComponent implements OnChanges {
         return devIndicatorValue/this.devIndicatorFactor;
       })
       .attr("stroke", "#000000")
-      .attr('fill', '#009A82');
+      .attr('fill', '#009A82')
+      .selectAll('title')
+      .data((d)=>[d])
+      .join('title')
+      .text((d:any) => `${d.properties.name}: ${abbreviateNumber(this.devIndicatorMap.get(d.properties.name))}` )
   }
 }
