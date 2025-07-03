@@ -1,0 +1,137 @@
+<ion-content [fullscreen]="true">
+    <ion-grid class="ion-margin layout-border">
+        <ion-row class="ion-margin-vertical ion-align-items-stretch">
+            <!-- info card -->
+            <ion-col size="12" size-md="3">
+                <!-- info card Component-->
+                <app-info-card [yearList]="yearList" (onSelectedYearChanged)="onSelectedYearChanged($event)"
+                    [devIndicatorList]="devIndicatorList"
+                    (onSelectedonDevIndicatorChanged)="onSelectedonDevIndicatorChanged($event)">
+                </app-info-card>
+                <!-- info card Component-->
+            </ion-col>
+            <!-- info card -->
+
+            <!-- map card -->
+            <ion-col size="12" size-md="9">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-card class="card-conatiner">
+                                <ion-card-header>
+                                    <ion-card-title>Country by {{selectedDevIndicator}}</ion-card-title>
+                                    <ion-card-subtitle>Country by {{selectedDevIndicator}}
+                                        <b>({{selectedYear}})</b></ion-card-subtitle>
+                                </ion-card-header>
+
+                                <ion-card-content class="center-content">
+                                    <!-- map components -->
+                                    @if(worldTopoJSON && yearWiseData){
+                                    <app-world-map [topoJSON]="worldTopoJSON" [chartWidth]="1000" [chartHeight]="500"
+                                        [yearWiseData]="yearWiseData"
+                                        [selectedDevIndicator]="selectedDevIndicator" [devIndicatorFactor]="topCountryByDevIndicator[topCountryByDevIndicator.length-1][selectedDevIndicator.toLocaleLowerCase()]*0.2"></app-world-map>
+                                    }
+                                    <!-- map components -->
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+            <!-- map card -->
+        </ion-row>
+        <ion-row class="ion-margin-vertical ion-align-items-stretch">
+            <!-- top country card and progress bar -->
+            <ion-col size="12" size-md="6">
+                <ion-card class="card-conatiner">
+                    <ion-card-header>
+                        <ion-card-title>Top Country by {{selectedDevIndicator}}</ion-card-title>
+                        <ion-card-subtitle>Top Country by {{selectedDevIndicator}}
+                            <b>({{selectedYear}})</b></ion-card-subtitle>
+                    </ion-card-header>
+
+                    <ion-card-content class="ion-no-padding ion-no-margin">
+                        <ion-list lines="none" class="ion-no-padding ion-no-margin">
+                            @for (country of topCountryByDevIndicator; track country.countryCode) {
+                            <ion-item class="ion-no-padding ion-no-margin">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col size="8" class="ion-text-left">
+                                            <h2>{{ country.countryName }} ({{ country.countryCode }})</h2>
+                                            <ion-text>
+                                                <ion-text color="tertiary">{{ selectedDevIndicator }}:</ion-text>&nbsp;
+                                                <b>{{
+                                                    abbreviateNumber(country[selectedDevIndicator.toLocaleLowerCase()])
+                                                    }}</b>
+                                            </ion-text>
+                                        </ion-col>
+                                        <ion-col size="4" class="ion-text-right">
+                                            <div [style.width.px]="300" [style.height.px]="10"
+                                                [style.background-color]="'#ccc'">
+                                                <div [style.width.%]="((+country[(selectedDevIndicator).toLocaleLowerCase()]) / (+worldData)) * 100"
+                                                    [style.height.%]="100" [style.background-color]="'#6030ff'">
+                                                </div>
+
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-item>
+                            }
+                        </ion-list>
+                    </ion-card-content>
+
+                </ion-card>
+            </ion-col>
+            <!-- top country trend over time card -->
+            <ion-col size="12" size-md="6">
+                <ion-card class="card-conatiner">
+                    <ion-card-header>
+                        <ion-card-title>Top Country Trends</ion-card-title>
+                        <ion-card-subtitle>Top Country Trends by Over the Year</ion-card-subtitle>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                @for (country of topCountryTrend; track country.countryCode; let i = $index) {
+                                <ion-col size="12" size-md="4">
+                                    <ion-card>
+                                        <ion-card-header>
+                                            <ion-card-title>{{country["Country Name"]}}</ion-card-title>
+                                            <ion-card-subtitle>Top Country Trends by
+                                                {{selectedDevIndicator}}</ion-card-subtitle>
+                                        </ion-card-header>
+
+                                        <ion-card-content>
+                                            @if(chartData){
+                                            <app-sparkline-chart [chartWidth]="300" [chartHeight]="100"
+                                                [chartData]="chartData[i]"></app-sparkline-chart>
+                                            }
+
+                                        </ion-card-content>
+                                    </ion-card>
+                                </ion-col>
+                                }
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-vertical">
+            <ion-col>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Compare Country Wise {{selectedDevIndicator}}</ion-card-title>
+                        <ion-card-subtitle>Compare Country Wise <b>({{selectedYear}})</b></ion-card-subtitle>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-text color="dark">Future Scope...</ion-text>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

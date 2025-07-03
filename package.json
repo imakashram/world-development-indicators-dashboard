@@ -1,7 +1,7 @@
 {
-  "name": "population_gdp_dashboard",
+  "name": "World Development Indicators",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Akash Ram",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -27,8 +27,11 @@
     "@capacitor/keyboard": "7.0.1",
     "@capacitor/status-bar": "7.0.1",
     "@ionic/angular": "^8.0.0",
+    "@types/d3": "^7.4.3",
+    "d3": "^7.9.0",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
+    "topojson-client": "^3.1.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
@@ -45,6 +48,7 @@
     "@capacitor/cli": "7.4.0",
     "@ionic/angular-toolkit": "^12.0.0",
     "@types/jasmine": "~5.1.0",
+    "@types/topojson-client": "^3.1.5",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "eslint": "^9.16.0",
@@ -60,5 +64,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.8.0"
   },
-  "description": "An Ionic project"
+  "description": "World Development Indicators Dashboard"
 }

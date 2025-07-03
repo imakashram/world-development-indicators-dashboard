@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'population_gdp_dashboard',
+  appName: 'World Development Indicators',
   webDir: 'www'
 };
 

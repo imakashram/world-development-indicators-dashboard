@@ -1,5 +1,5 @@
 {
-  "name": "population_gdp_dashboard",
+  "name": "World Development Indicators",
   "integrations": {
     "capacitor": {}
   },

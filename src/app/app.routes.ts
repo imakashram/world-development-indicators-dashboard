@@ -2,12 +2,22 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    path: 'app',
+    children:[
+     {
+        path: 'world-development-indicator-dashboard',
+        loadComponent: () => import('./pages/world-development-indicator-dashboard/world-development-indicator-dashboard.page').then( m => m.WorldDevelopmentIndicatorDashboardPage)
+      },
+    ]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'app/world-development-indicator-dashboard',
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    redirectTo: 'app/world-development-indicator-dashboard',
+  }
+  
 ];
